@@ -1,0 +1,4 @@
+citas:
+    resource: "@CitasBundle/Controller/"
+    type:     annotation
+    prefix:   /
