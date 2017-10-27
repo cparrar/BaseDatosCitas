@@ -7,15 +7,16 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Consultorios
  *
- * @ORM\Table(name="consultorios")
+ * @ORM\Table(name="TBL_CONSULTORIOS")
  * @ORM\Entity(repositoryClass="CitasBundle\Repository\ConsultoriosRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Consultorios
 {
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="ID", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
@@ -24,16 +25,23 @@ class Consultorios
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="NOMBRE", type="string", length=255)
      */
     private $name;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="is_active", type="boolean")
+     * @ORM\Column(name="ACTIVO", type="boolean")
      */
     private $isActive;
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function setPrePersistData() {
+        $this->isActive = true;
+    }
 
 
     /**
@@ -94,4 +102,3 @@ class Consultorios
         return $this->isActive;
     }
 }
-

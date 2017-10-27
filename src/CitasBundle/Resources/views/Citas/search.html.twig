@@ -1,10 +1,70 @@
-<html>
-    <head>
-        <title>Buscar Citas</title>
-    </head>
-    <body>
-        <form action="javascript:;" method="POST">
+{% extends 'CitasBundle:Base:base.html.twig' %}
 
-        </form>
-    </body>
-</html>
+{% block title %}Buscar Citas{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="col-md-12 ">
+                <div class="portlet light">
+                    <div class="portlet-title">
+                        <div class="caption font-red-sunglo">
+                            <i class="icon-settings font-red-sunglo"></i>
+                            <span class="caption-subject bold uppercase"> Seleccione un metodo de busqueda</span>
+                        </div>
+                    </div>
+                    <div class="portlet-body form">
+                        <form action="javascript:;" method="POST" role="form" id="form_search">
+                            <div class="form-body">
+                                <div class="form-group form-md-line-input">
+                                    <input type="text" name="name" class="form-control" id="form_control_1" placeholder="Ingrese Apellidos">
+                                    <label for="form_control_1">Apellidos</label>
+                                </div>
+                                <div class="form-group form-md-line-input">
+                                    <input type="text" name="document" class="form-control" id="form_control_1" placeholder="Numero de Cedula">
+                                    <label for="form_control_1">Cedula</label>
+                                </div>
+                                <div class="form-group form-md-line-input has-success">
+                                    <input type="date" name="date" class="form-control" id="form_control_1" placeholder="Fecha de la Cita">
+                                    <label for="form_control_1">Fecha</label>
+                                </div>
+                            </div>
+                            <div class="form-actions noborder">
+                                <button type="submit" class="btn blue send">Buscar</button>
+                                <button type="reset" class="btn default">Borrar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="col-md-12 ">
+                <div class="portlet light">
+                    <div class="portlet-body form" id="result"><h4>No Hay Datos</h4></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/citas/assets/global/plugins/jquery-validation/js/jquery.validate.js') }}"></script>
+    <script src="{{ asset('bundles/citas/assets/global/plugins/jquery-validation/js/additional-methods.js') }}"></script>
+    <script>
+        jQuery(document).ready(function() {
+            jQuery(".send").click(function() {
+                jQuery.ajax({
+                    url : "{{ path('citas_search_ajax') }}",
+                    type: "POST",
+                    dataType : "html",
+                    data: jQuery("#form_search").serialize(),
+                    success : function(result) {
+                        jQuery("#result").html(result);
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}

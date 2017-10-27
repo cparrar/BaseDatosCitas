@@ -2,3 +2,6 @@ services:
 #    citas.example:
 #        class: CitasBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
+    citas.log:
+        class: \CitasBundle\Services\LogService
+        arguments: ["@filesystem"]

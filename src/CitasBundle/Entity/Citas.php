@@ -53,6 +53,14 @@ class Citas
     private $patient;
 
     /**
+     * @var \CitasBundle\Entity\Consultorios
+     *
+     * @ORM\ManyToOne(targetEntity="CitasBundle\Entity\Consultorios")
+     * @ORM\JoinColumn(name="CONSULTORIO", referencedColumnName="ID")
+     */
+    private $consulting;
+
+    /**
      * @var bool
      *
      * @ORM\Column(name="ACTIVO", type="boolean")
@@ -195,5 +203,29 @@ class Citas
     public function getPatient()
     {
         return $this->patient;
+    }
+
+    /**
+     * Set consulting
+     *
+     * @param \CitasBundle\Entity\Consultorios $consulting
+     *
+     * @return Citas
+     */
+    public function setConsulting(\CitasBundle\Entity\Consultorios $consulting = null)
+    {
+        $this->consulting = $consulting;
+
+        return $this;
+    }
+
+    /**
+     * Get consulting
+     *
+     * @return \CitasBundle\Entity\Consultorios
+     */
+    public function getConsulting()
+    {
+        return $this->consulting;
     }
 }

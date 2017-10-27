@@ -2,20 +2,20 @@
     <li class="start ">
         <a href="index.html">
             <i class="icon-home"></i>
-            <span class="title">Dashboard</span>
+            <span class="title">Inicio</span>
         </a>
     </li>
-    <li class="active open">
+    <li class="{{ app.request.attributes.get('_route') in ['citas_search'] ? 'active open' : '' }}">
         <a href="javascript:;">
             <i class="icon-basket"></i>
-            <span class="title">eCommerce</span>
+            <span class="title">Citas</span>
             <span class="arrow "></span>
         </a>
         <ul class="sub-menu">
             <li class="active">
-                <a href="ecommerce_index.html">
-                    <i class="icon-home"></i>
-                    Dashboard</a>
+                <a href="{{ path('citas_search') }}">
+                    <i class="icon-basket"></i>
+                    Buscar</a>
             </li>
             <li>
                 <a href="ecommerce_orders.html">

@@ -1,0 +1,28 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>FECHA CITA</th>
+            <th>PACIENTE</th>
+            <th>MEDICO</th>
+            <th>CONSULTORIO</th>
+            <th>ESPECIALIDAD</th>
+            <th>EPS</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in request %}
+            <tr>
+                <td>{{ item.citacion|date("Y-m-d H:i") }}</td>
+                <td>{{ item.paciente|title }}</td>
+                <td>{{ item.medico|title }}</td>
+                <td>{{ item.consultorio|title }}</td>
+                <td>{{ item.especialidad|title }}</td>
+                <td>{{ item.eps|title }}</td>
+            </tr>
+         {% else %}
+            <tr>
+                <td colspan="6">No hay Datos</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

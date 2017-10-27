@@ -23,7 +23,23 @@
             $medicos = $this->getMedicos($manager, $faker, $especialidad);
             $eps = $this->getEPS($manager, $faker);
             $pacientes = $this->getPacientes($manager, $faker, $eps);
+            $this->getConsultorios($manager);
+        }
 
+        /**
+         * @param ObjectManager $manager
+         */
+        private function getConsultorios(ObjectManager $manager) {
+
+            for ($i = 1; $i < 6; $i++) {
+
+                for ($j = 1; $j < 6; $j++) {
+                    $entity = new \CitasBundle\Entity\Consultorios();
+                    $entity->setName(sprintf('%s0%s', $i, $j));
+                    $manager->persist($entity);
+                }
+            }
+            $manager->flush();
         }
 
         /**
